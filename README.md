@@ -90,7 +90,10 @@ ex.) wget https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux
 
 
 >>> mkdir ~/terraform
+>>> 
 >>> cd ~/terraform
+>>> 
+
 >>> nano config.tf
 >>> 
 >>> COPY THIS INTO YOUR NANO FILE AND SAVE USING CTRL+X or you can edit this with the text editor of your choice
