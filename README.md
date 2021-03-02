@@ -242,21 +242,43 @@ NOW SELECT NODES AND YOU SHOULD SEE YOUR KUBERNETES CLUSTER WHICH YOUB USED TERR
 
 
 
+install jenkins
 
 
-in search bar searck eks
-select cluster
+sudo apt update
+sudo apt install openjdk-11-jdk
+
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+sudo apt update
+
+sudo apt install jenkins
+
+systemctl status jenkins
 
 
 
 
+sudo ufw allow proto tcp from 192.168.121.0/24 to any port 8080
+
+
+sudo ufw allow 8080
 
 
 
+NOW ON BROWSER SEARCH localhost:8080
 
 
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+enter this password
+
+install suggested plugins
 
 
+make and account, save and finish
 
 
 
