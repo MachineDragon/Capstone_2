@@ -12,8 +12,8 @@ after installing complete, select Devices >> Insert guest additions and install
 
 open up terminal and run 
 
->>>>>     sudo apt-get install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
->>>>>     reboot
+>>>     sudo apt-get install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+>>>     reboot
 
 Now Virtual Machine is ready To start the project
 
