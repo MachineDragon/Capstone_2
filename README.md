@@ -281,7 +281,15 @@ install suggested plugins
 make and account, save and finish
 
 
+manage plugins
 
+available
+
+convert to pipeline
+shiningpanda
+
+docker pipeline
+kubernetes
 
 
 
