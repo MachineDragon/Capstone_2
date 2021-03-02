@@ -60,6 +60,7 @@ Launch the terminal and type
 >>>> sudo snap install google-cloud-sdk --classic
 >>>> sudo apt-get install zip -y
 >>>> sudo apt install wget
+>>>> sudo apt install kubectl
 
 >>>> sudo docker login
 >>>> -- you need to create a dockerhub account for this part, sign up at https://hub.docker.com/
@@ -114,8 +115,137 @@ This should run successful or your missing a few things
 
 NOW WE ARE READY TO START OUR elastic kubernetes service(EKS) hosted on amazon AWS
 
-WARNING THIS MIGHT CHARGE 
+WARNING THIS MIGHT CHARGE your account proceed at your own risk of getting charged
 
+
+Setting up IAMS Account
+
+Go here https://aws.amazon.com/
+
+select sign in to the console window
+
+
+search users
+select users with IAM feature
+
+Create a new user
+
+check Programmatic access and AWS Management Console access
+leave unchecked Require password reset
+
+select next
+
+select Attach existing policies directly
+
+check AdministratorAccess
+select next
+skip tags press next
+
+select create user
+select Download.csv file
+
+SAVE THIS FILE IN A SECURE LOCATION, Recommended to backup on clout
+
+now you need your region, look in your searchbar on the top it should say its location
+ex.) https://console.aws.amazon.com/iam/home?region=us-east-2
+mine is us-east-2
+you will need this for the next step
+
+open this file to get the access keys
+
+
+Now reopen your terminal and type 
+
+$ aws configure
+AWS Access Key ID [None]: YOUR_AWS_ACCESS_KEY_ID                                         enter your credentials from the file we just downloaded
+AWS Secret Access Key [None]: YOUR_AWS_SECRET_ACCESS_KEY                                 
+Default region name [None]: YOUR_AWS_REGION                                                      
+Default output format [None]: json
+
+
+
+
+
+>>> AHNBFDIU324H27ED8WD78!SFDW/ 
+>>> 6DSFJH34R7YFER8WEHT847TG7ER8TGYHRIGYU4589TU5IRUT
+>>> us-east-2                                 <<<<< for this step enter your specific region
+>>> json
+>>> 
+
+
+
+we are now setup and configured your aws to interact with your local machine CONGRATS!!! :)
+
+
+
+Documentation from hashicorp on how to launch eks cluster gotten from hashicorp website
+https://learn.hashicorp.com/tutorials/terraform/eks?in=terraform/kubernetes&utm_source=WEBSITE&utm_medium=WEB_BLOG&utm_offer=ARTICLE_PAGE
+
+
+git clone https://github.com/hashicorp/learn-terraform-provision-eks-cluster
+
+
+cd learn-terraform-provision-eks-cluster
+
+
+terraform init
+
+
+terraform apply
+
+
+>>> enter yes
+>>> 
+this should take about 10 minutes +
+
+
+
+aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
+
+
+wget -O v0.3.6.tar.gz https://codeload.github.com/kubernetes-sigs/metrics-server/tar.gz/v0.3.6 && tar -xzf v0.3.6.tar.gz
+
+
+kubectl apply -f metrics-server-0.3.6/deploy/1.8+/
+
+kubectl get deployment metrics-server -n kube-system
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
+
+
+
+kubectl proxy
+
+
+
+NOW IN YOUR SEARCH BAR PASTE THIS IN
+http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+SELECT TOKEN
+
+OPEN A NEW TERMINAL
+kubectl apply -f https://raw.githubusercontent.com/hashicorp/learn-terraform-provision-eks-cluster/master/kubernetes-dashboard-admin.rbac.yaml
+
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep service-controller-token | awk '{print $1}')
+
+
+YOU SHOULD SEE CERTIFICATE-AUTHORITY-DATA: FOLLOWED BY AN EXTREMELY LONG SET OF CHARACTER STRINGS, COPY THIS STRING INTO TOKEN
+
+NOW SELECT NODES AND YOU SHOULD SEE YOUR KUBERNETES CLUSTER WHICH YOUB USED TERRAFORM TO SETUP YOUR KUBERNETES CLUSTER ENVIRONMENT
+
+
+
+
+
+
+
+
+
+
+
+
+in search bar searck eks
+select cluster
 
 
 
