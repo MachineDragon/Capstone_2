@@ -59,6 +59,7 @@ Launch the terminal and type
 >>>> sudo apt install docker.io
 >>>> sudo snap install google-cloud-sdk --classic
 >>>> sudo apt-get install zip -y
+>>>> sudo apt install wget
 
 >>>> sudo docker login
 >>>> -- you need to create a dockerhub account for this part, sign up at https://hub.docker.com/
