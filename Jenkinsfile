@@ -14,6 +14,7 @@ pipeline {
 				}
 			}
 		}
+	}
 		stage('Clone Repo') {
 			steps {			
 				script {
