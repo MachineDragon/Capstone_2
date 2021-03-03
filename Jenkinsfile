@@ -1,20 +1,19 @@
 pipeline {
 	agent any 
 	environment {
-		DOCKER_HUB_REPO = "mikehj24/capstone2"
+		DOCKER_HUB_REPO = "mikehj24/miko_flask_app"
 		CONTAINER_NAME = "capstone2"
 		REGISTRY_CREDENTIAL = "dockerhub"
 	}
   
 	stages {
-		steps {
-			stage('Clean Workspace') {
+		stage('Clean Workspace') {
+			steps {
 				script {
 					sh 'rm -rf Capstone_2'	
 				}
 			}
 		}
-	}
 		stage('Clone Repo') {
 			steps {			
 				script {
@@ -32,20 +31,23 @@ pipeline {
 					} 				
 				}
 			}
-			stage('Push docker image') {
-				steps {
-					script {		        
-						docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
-							sh 'docker push mikehj24/capstone2:$BUILD_NUMBER'
-							sh 'docker push mikehj24/capstone2:latest'				    				        
-						}		
-          }
-	}
 			}
-			stage('Deploy to kubernetes') {					
+		stage('Push docker image') {
+			steps {
+				script {		        
+					docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
+						sh 'docker push mikehj24/capstone2:$BUILD_NUMBER'
+						sh 'docker push mikehj24/capstone2:latest'				    				        
+					}		
+				}
+			}
+		}
+		stage('Deploy to kubernetes') {	
+			steps {		
 				script {
 					sh 'kubectl apply -f kubernetes.yaml'
 					sh 'kubectl get service/capstone2-service'
+					}
 				}
 			}
 		}
