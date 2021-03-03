@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: miko_flask-deployment
+  name: miko-flask-deployment
   labels:
     app: flaskapp
 spec:
@@ -23,7 +23,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: miko_flask_app-service
+  name: miko-flask-app-service
 spec:
   type: NodePort
   selector:
