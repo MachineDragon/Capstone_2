@@ -26,7 +26,7 @@ pipeline {
 				script {
 					dir('./Capstone_2') {
 						sh 'docker image build -t $DOCKER_HUB_REPO:latest .'
-						sh 'docker image tag $DOCKER_HUB_REPO:latest $DOCKER_HUB_REPO:$BUILD_NUMBER'
+						sh 'docker image tag $DOCKER_HUB_REPO:latest $DOCKER_HUB_REPO'
 						echo "your image was built successfully"
 					} 				
 				}
@@ -36,7 +36,7 @@ pipeline {
 			steps {
 				script {		        
 					docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
-						sh 'docker push mikehj24/capstone2:$BUILD_NUMBER'
+						sh 'docker push mikehj24/capstone2'
 						sh 'docker push mikehj24/capstone2:latest'				    				        
 					}		
 				}
