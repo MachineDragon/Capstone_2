@@ -46,7 +46,7 @@ pipeline {
 			steps {		
 				script {
 					sh 'kubectl apply -f kubernetes.yml'
-					sh 'kubectl get service/capstone2-service'
+					sh 'kubectl get service/miko-flask-app-service '
 					}
 				}
 			}
