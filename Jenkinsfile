@@ -45,7 +45,7 @@ pipeline {
 		stage('Deploy to kubernetes') {	
 			steps {		
 				script {
-					sh 'kubectl apply -f kubernetes.yaml'
+					sh 'kubectl apply -f kubernetes.yml'
 					sh 'kubectl get service/capstone2-service'
 					}
 				}
