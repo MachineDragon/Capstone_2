@@ -224,3 +224,10 @@ sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2 curl c
 mkdir dev cd dev
 
 kubectl apply -f terraform-helm/example/workspace_registry.yaml -n prepod
+
+
+
+PROJECT DELIVERABLES
+https://github.com/mikehj122498/Capstone_2/blob/main/LucidChart.jpeg
+https://github.com/mikehj122498/Capstone_2/blob/main/EKS_INSTANCES.png
+
